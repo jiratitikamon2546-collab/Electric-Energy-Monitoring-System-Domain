@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building A - Electric Energy Monitoring System</title>
+  <link rel="stylesheet" href="showA.css" />
+</head>
+<body>
+  <div class="page-shell">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="project-frame">
+        <div class="brand-wrap">
+          <img src="KMITLHead.png" alt="KMITL Logo" class="logo" />
+          <div class="brand-text">
+            <h1>Electric Energy Monitoring System</h1>
+            <p>for King Mongkut's Institute of Technology Ladkrabang Prince of Chumphon Campus on Dashboard</p>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="home-btn" onclick="goHome()">Home</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO IMAGE -->
+    <section class="hero-section">
+
+      <video class="hero-image" autoplay muted loop playsinline>
+    <source src="Vshow1.mov" type="video/mp4">
+  </video>
+
+      <div class="hero-overlay">
+        <div class="hero-title">อาคารสมเด็จพระเทพรัตนราชสุดาฯ</div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <main class="dashboard-wrap">
+
+      <!-- ROW TOP -->
+      <section class="row-top">
+
+        <!-- LEFT GROUP -->
+        <div class="group-card">
+          <div class="group-title">Last - Time</div>
+          <div class="group-content">
+            <div class="graph-card">
+              <div class="graph-title" id="title-g1">Real Power</div>
+              <iframe id="g1" loading="lazy" title="Real Power"></iframe>
+            </div>
+
+            <div class="graph-card">
+              <div class="graph-title" id="title-g2">Peak Demand</div>
+              <iframe id="g2" loading="lazy" title="Peak Demand"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT GROUP -->
+        <div class="group-card">
+          <div class="group-title">Today</div>
+          <div class="group-content">
+            <div class="graph-card">
+              <div class="graph-title" id="title-g3">Voltage / Current</div>
+              <iframe id="g3" loading="lazy" title="Voltage / Current"></iframe>
+            </div>
+
+            <div class="graph-card">
+              <div class="graph-title" id="title-g4">Power Factor</div>
+              <iframe id="g4" loading="lazy" title="Power Factor"></iframe>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ROW BOTTOM -->
+      <section class="row-bottom">
+        <div class="bottom-left">
+          <div class="graph-card">
+            <div class="graph-title" id="title-g5">Main Analysis</div>
+            <iframe id="g5" loading="lazy" title="Main Analysis"></iframe>
+          </div>
+        </div>
+
+        <div class="bottom-right">
+          <div class="graph-card">
+            <div class="graph-title" id="title-g6">Summary</div>
+            <iframe id="g6" loading="lazy" title="Summary"></iframe>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <div id="pageTransition"></div>
+
+
+ <div class="manual-nav">
+  <button class="nav-btn prev-btn" onclick="goToPrevPage()">❮</button>
+  <button class="nav-btn next-btn" onclick="goToNextPageManual()">❯</button>
+</div>
+
+  <script src="showA.js"></script>
+  <script src="HOMEshow.js"></script>
+</body>
+</html>

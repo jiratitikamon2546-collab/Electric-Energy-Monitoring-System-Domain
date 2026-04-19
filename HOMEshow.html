@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Electric Energy Monitoring System</title>
+  <link rel="stylesheet" href="HOMEshow.css" />
+</head>
+<body data-grafana-base="https://grafana.kmitl-pcc-energy.com/d-solo/25629c47-b533-4401-9608-47eab0f23398/pre-all?">
+
+  <div class="dashboard">
+
+    <header class="topbar">
+      <div class="brand">
+        <img src="KMITLHead.png" alt="KMITL Logo" class="logo">
+        <div class="title-wrap">
+          <h1 class="project-title">Electric Energy Monitoring System </h1>
+          <p class="project-subtitle">
+            for King Mongkut's Institute of Technology Ladkrabang Prince of Chumphon Campus on Dashboard
+          </p>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <button class="home-btn" onclick="goHome()">Home</button>
+      </div>
+    </header>
+
+    <section class="hero-card">
+      <img class="hero-image" src="1.KMITLHOME.jpg" alt="Campus">
+      <div class="hero-overlay"></div>
+      <div class="hero-text">
+        <h2>Campus Energy Monitoring System</h2>
+        <p>Overview of campus energy consumption</p>
+      </div>
+    </section>
+
+    <section class="row-three">
+      <div class="graph-card">
+        <div class="graph-title">Total Energy Consumption</div>
+        <iframe data-panel-id="2"></iframe>
+      </div>
+
+      <div class="graph-card">
+        <div class="graph-title">Total Real Power Consumption</div>
+        <iframe data-panel-id="1"></iframe>
+      </div>
+
+      <div class="graph-card">
+        <div class="graph-title">Today's Hightest Real Power by Building</div>
+        <iframe data-panel-id="3"></iframe>
+      </div>
+    </section>
+
+    <section class="row-two">
+      <div class="graph-card">
+        <div class="graph-title">Total Real Power Trend</div>
+        <iframe data-panel-id="4"></iframe>
+      </div>
+
+      <div class="graph-card">
+        <div class="graph-title">Today's Energy Consumption per Building</div>
+        <iframe data-panel-id="5"></iframe>
+      </div>
+    </section>
+
+  </div>
+
+  <div id="pageTransition"></div>
+
+  <!-- 🔥 ปุ่มกดเลื่อนเอง -->
+  <div class="manual-nav">
+    <button class="nav-btn prev-btn" onclick="goToPrevPage()">❮</button>
+    <button class="nav-btn next-btn" onclick="goToNextPageManual()">❯</button>
+  </div>
+
+  <script src="HOMEshow.js"></script>
+</body>
+</html>

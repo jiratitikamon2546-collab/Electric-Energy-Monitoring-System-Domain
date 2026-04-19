@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Electric Energy Monitoring System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Homepage20.css">
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-brand">
+      <img src="KMITLHead.png" class="project-logo" alt="logo">
+      <div class="project-title">
+        Electric Energy Monitoring System<br>
+        for King Mongkut's Institute of Technology Ladkrabang<br>
+        <span>Prince of Chumphon Campus on Dashboard</span>
+      </div>
+    </div>
+
+    <div class="topbar-actions">
+      <button onclick="goHome()">🏠Home</button>
+      <button onclick="goToPage()">Show</button>
+
+      <input type="datetime-local" id="startTime">
+      <input type="datetime-local" id="endTime">
+
+      <button onclick="applyTime()">Apply</button>
+      <button onclick="resetTimeFilter()">Reset Time</button>
+
+      <select id="timeRange" onchange="applyPresetRange(this.value)">
+        <option value="">Absolute time range</option>
+        <option value="5m">Last 5 min</option>
+        <option value="15m">Last 15 min</option>
+        <option value="30m">Last 30 min</option>
+        <option value="1h">Last 1 hr.</option>
+        <option value="3h">Last 3 hr.</option>
+        <option value="6h">Last 6 hr.</option>
+        <option value="12h">Last 12 hr.</option>
+        <option value="1d">Last 1 day</option>
+        <option value="1w">Last 1 week</option>
+        <option value="1M">Last 1 month</option>
+        <option value="1y">Last 1 year</option>
+        <option value="18M">Last 1.5 year</option>
+        <option value="2y">Last 2 year</option>
+      </select>
+
+      <select onchange="changeBuilding(this.value)" id="buildingSelect">
+        <option value="ALL">ALL</option>
+        <option value="A">อาคารสมเด็จพระเทพรัตนราชสุดาฯ (ตึกA)</option>
+        <option value="B">อาคารเฉลิมพระเกียรติฯ (ตึกB)</option>
+        <option value="C">อาคารปฏิบัติการวิทยาศาสตร์ (ตึกC)</option>
+        <option value="D">อาคารปฏิบัติการวิศวกรรมศาสตร์ (ตึกD)</option>
+        <option value="E">อาคารสำนักวิชาและบริหารธุรกิจ (ตึกE)</option>
+        <option value="ME">อาคารปฏิบัติการวิศวกรรมเครื่องกล (ME)</option>
+        <option value="RIE">อาคารปฏิบัติการวิศวกรรมหุ่นยนต์และอิเล็กทรอนิกส์อัจฉริยะ (RIE)</option>
+        <option value="AE">อาคารปฏิบัติการวิศวกรรมเกษตร (AE)</option>
+        <option value="PP">อาคารปฏิบัติการผลิตพืช (PP)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="hero" id="heroSlider">
+    <button class="hero-arrow hero-arrow-left" onclick="prevHeroImage()">&#10094;</button>
+    <button class="hero-arrow hero-arrow-right" onclick="nextHeroImage()">&#10095;</button>
+
+    <div class="hero-dots" id="heroDots"></div>
+
+    <div class="graph-overlay home-mode two-graphs" id="topGraphs">
+      <div class="graph-card">
+        <div class="graph-title">Total Real Power Consumption</div>
+        <iframe id="g1"></iframe>
+      </div>
+
+      <div class="graph-card">
+        <div class="graph-title">Total Energy Consumption</div>
+        <iframe id="g2"></iframe>
+      </div>
+
+      <div class="graph-card extra-top-card hidden-top-graph">
+        <div class="graph-title">Real Power Consumption</div>
+        <iframe id="g3"></iframe>
+      </div>
+
+      <div class="graph-card extra-top-card hidden-top-graph">
+        <div class="graph-title">Monthly Energy Consumption</div>
+        <iframe id="g4"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="container full" id="mainContainer">
+    <div class="sidebar hidden" id="sidebar">
+      <h3>Menu</h3>
+      <ul id="menuList"></ul>
+      <div id="buildingImageWrap"></div>
+      <button onclick="goNextBuilding()">ตึกถัดไป</button>
+    </div>
+
+    <div class="content">
+      <div id="allGraphs" class="grid full home-layout">
+        <div class="big-card" id="card-b1">
+          <div class="graph-title">Energy Consumption (Today)</div>
+          <iframe id="b1"></iframe>
+        </div>
+
+        <div class="big-card" id="card-b2">
+          <div class="graph-title">Peak Energy Consumption (Today)</div>
+          <iframe id="b2"></iframe>
+        </div>
+
+        <div class="big-card" id="card-b3">
+          <div class="graph-title">Peak Real Power Consumption (Today)</div>
+          <iframe id="b3"></iframe>
+        </div>
+
+        <div class="big-card" id="card-b4">
+          <div class="graph-title">Hightest Peak Real Power : Building (Today)</div>
+          <iframe id="b4"></iframe>
+        </div>
+
+        <div class="big-card" id="card-b5">
+          <div class="graph-title">Total Real Power </div>
+          <iframe id="b5"></iframe>
+        </div>
+
+        <div class="big-card" id="card-b6">
+          <div class="graph-title">Monthly Energy</div>
+          <iframe id="b6"></iframe>
+        </div>
+
+        <div class="big-card" id="card-b7">
+          <div class="graph-title">Monthly Peak Demand (kW)</div>
+          <iframe id="b7"></iframe>
+        </div>
+
+        <div class="big-card" id="card-b8">
+          <div class="graph-title">Monthly Peak Demand (kvar)</div>
+          <iframe id="b8"></iframe>
+        </div>
+      </div>
+
+      <div id="singleGraph" style="display:none;">
+        <button class="back-btn" onclick="backToAll()">ย้อนกลับ</button>
+        <div class="single-card">
+          <iframe id="single"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="Homepage50.js"></script>
+  
+</body>
+</html>

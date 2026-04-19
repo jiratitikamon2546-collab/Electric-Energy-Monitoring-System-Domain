@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Energy Dashboard - อาคาร ME</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pageA.css">
+</head>
+<body>
+
+ <div class="title">
+  อาคารปฏิบัติการวิศวกรรมเครื่องกล <span>(ตึก ME)</span>
+</div>
+
+  <div class="topbar">
+    <input type="datetime-local" id="start">
+    <input type="datetime-local" id="end">
+
+    <select id="preset">
+      <option value="">Absolute time range</option>
+      <option value="5m">Last 5 min</option>
+      <option value="15m">Last 15 min</option>
+      <option value="30m">Last 30 min</option>
+      <option value="1h">Last 1 hr.</option>
+      <option value="3h">Last 3 hr.</option>
+      <option value="6h">Last 6 hr.</option>
+      <option value="12h">Last 12 hr.</option>
+      <option value="1d">Last 1 day</option>
+      <option value="1w">Last 1 week</option>
+      <option value="1M">Last 1 month</option>
+      <option value="1y">Last 1 year</option>
+      <option value="18M">Last 1.5 year</option>
+      <option value="2y">Last 2 year</option>
+    </select>
+
+    <button onclick="applyTime()">Apply</button>
+    <button onclick="resetTime()">Reset</button>
+    <button onclick="toggleSidebar()">☰</button>
+
+    <div class="nav-right">
+      <button class="home-btn" onclick="goHome()">🏠 Home</button>
+
+       <select id="buildingSelect" class="building-select" onchange="goToBuildingFromDropdown()">
+  <option value="">select building</option>
+  <option value="A">อาคารสมเด็จพระเทพรัตนราชสุดาฯ (ตึกA)</option>
+  <option value="B">อาคารเฉลิมพระเกียรติฯ (ตึกB)</option>
+  <option value="C">อาคารปฏิบัติการวิทยาศาสตร์ (ตึกC)</option>
+  <option value="D">อาคารปฏิบัติการวิศวกรรมศาสตร์ (ตึกD)</option>
+  <option value="E">อาคารสำนักวิชาและบริหารธุรกิจ (ตึกE)</option>
+  <option value="ME">อาคารปฏิบัติการวิศวกรรมเครื่องกล (ME)</option>
+  <option value="RIE">อาคารปฏิบัติการวิศวกรรมหุ่นยนต์และอิเล็กทรอนิกส์อัจฉริยะ (RIE)</option>
+  <option value="AE">อาคารปฏิบัติการวิศวกรรมเกษตร (AE)</option>
+  <option value="PP">อาคารปฏิบัติการผลิตพืช (PP)</option>
+</select>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="sidebar" id="sidebar">
+
+      <!-- Quick Command -->
+      <div class="sidebar-block">
+        <div class="sidebar-title">Graph 3 Phase</div>
+        <div class="quick-btn-grid">
+          <button class="quick-graph-btn" onclick="showSingleGraph('S', this)">Apparent Power(S)</button>
+<button class="quick-graph-btn" onclick="showSingleGraph('P', this)">Real Power(P)</button>
+<button class="quick-graph-btn" onclick="showSingleGraph('Q', this)">Reactive power (Q)</button>
+<button class="quick-graph-btn" onclick="showSingleGraph('PF', this)">Power factor (PF)</button>
+<button class="quick-graph-btn" onclick="showSingleGraph('E', this)">Energy  </button>
+        </div>
+      </div>
+
+      <!-- Phase -->
+      <div class="sidebar-block">
+        <div class="sidebar-title">Phase View</div>
+
+        <div class="phase-btn-list">
+          <button class="phase-normal-btn active" id="phaseBtnAll" onclick="showAllGraphs(this)">
+             ALL
+          </button>
+
+          <button class="phase-normal-btn" id="phaseBtn1" onclick="openPhasePage(1, this)">
+            PHASE 1
+          </button>
+
+          <button class="phase-normal-btn" id="phaseBtn2" onclick="openPhasePage(2, this)">
+            PHASE 2
+          </button>
+
+          <button class="phase-normal-btn" id="phaseBtn3" onclick="openPhasePage(3, this)">
+            PHASE 3
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="main">
+
+      <!-- Single graph -->
+      <div class="single-graph-view" id="singleGraphView">
+        <div class="group single-graph-group">
+          <div class="single-graph-head">
+            <h3 id="singleGraphTitle">Single Graph</h3>
+            <button class="back-btn" onclick="backToMainDashboard()">
+       Back to Dashboard ME
+</button>
+          </div>
+          <div class="graph single-graph-frame">
+            <iframe id="singleGraphFrame"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- หน้าแรก -->
+      <div id="mainDashboardPage">
+        <div class="dashboard-grid">
+          <div class="left-column">
+            <div class="group realtime-group">
+              <h3>Last time</h3>
+              <div class="row row-5">
+                <div class="graph phase-card common-card"><iframe id="rt1"></iframe></div>
+                <div class="graph phase-card common-card"><iframe id="rt2"></iframe></div>
+                <div class="graph phase-card common-card"><iframe id="rt3"></iframe></div>
+                <div class="graph phase-card common-card"><iframe id="rt4"></iframe></div>
+                <div class="graph phase-card common-card"><iframe id="rt5"></iframe></div>
+              </div>
+            </div>
+
+            <div class="group voltage-group">
+              <h3>Voltage</h3>
+              <div class="row row-3">
+                <div class="graph phase-card" data-phase="1"><iframe id="v1"></iframe></div>
+                <div class="graph phase-card" data-phase="2"><iframe id="v2"></iframe></div>
+                <div class="graph phase-card" data-phase="3"><iframe id="v3"></iframe></div>
+              </div>
+            </div>
+
+            <div class="group current-group">
+              <h3>Current</h3>
+              <div class="row row-3">
+                <div class="graph phase-card" data-phase="1"><iframe id="c1"></iframe></div>
+                <div class="graph phase-card" data-phase="2"><iframe id="c2"></iframe></div>
+                <div class="graph phase-card" data-phase="3"><iframe id="c3"></iframe></div>
+              </div>
+            </div>
+
+            <div class="group pf-group">
+              <h3>Power Factor</h3>
+              <div class="row row-3">
+                <div class="graph phase-card" data-phase="1"><iframe id="pf1"></iframe></div>
+                <div class="graph phase-card" data-phase="2"><iframe id="pf2"></iframe></div>
+                <div class="graph phase-card" data-phase="3"><iframe id="pf3"></iframe></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="right-column">
+            <div class="group today-group small-stat">
+              <h3>Today</h3>
+              <div class="row row-2">
+                <div class="graph common-card"><iframe id="td1"></iframe></div>
+                <div class="graph common-card"><iframe id="td2"></iframe></div>
+              </div>
+            </div>
+
+            <div class="group monthly-group small-stat">
+              <h3>Monthly</h3>
+              <div class="row row-2">
+                <div class="graph common-card"><iframe id="mo1"></iframe></div>
+                <div class="graph common-card"><iframe id="mo2"></iframe></div>
+              </div>
+            </div>
+
+            <div class="group peak-group small-stat">
+              <h3>Peak Demand</h3>
+              <div class="row row-2">
+                <div class="graph common-card"><iframe id="pk1"></iframe></div>
+                <div class="graph common-card"><iframe id="pk2"></iframe></div>
+              </div>
+            </div>
+
+            <div class="group image-card">
+              
+              <div class="image-box">
+                <img src="ME.png" alt="Energy Overview">
+              </div>
+            </div>
+
+            <div class="group extra-graph">
+              <h3>Daily Energy</h3>
+              <div class="graph common-card">
+                <iframe id="ex1"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="total-row">
+          <div class="group total-group">
+            <h3>Real Power (3Φ)</h3>
+            <div class="graph total-horizontal">
+              <iframe id="totalPower"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="special-power-row">
+          <div class="group special-power-group">
+            <h3>Apparent Power (3Φ)</h3>
+            <div class="graph special-horizontal">
+              <iframe id="sPower"></iframe>
+            </div>
+          </div>
+
+          <div class="group special-power-group">
+            <h3>Reactive Power (3Φ)</h3>
+            <div class="graph special-horizontal">
+              <iframe id="qPower"></iframe>
+            </div>
+          </div>
+
+          <div class="group special-power-group">
+            <h3>Energy </h3>
+            <div class="graph special-horizontal">
+              <iframe id="ePower"></iframe>
+            </div>
+          </div>
+
+          <div class="group special-power-group">
+            <h3>Power Factor (3Φ)</h3>
+            <div class="graph special-horizontal">
+              <iframe id="pfSummary"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<div id="phaseDashboardPage" class="phase-dashboard-page" style="display:none;">
+  <div class="phase-page-header">
+    <h2 id="phasePageTitle">PHASE 1 Dashboard</h2>
+    <button class="single-close-btn" onclick="backToMainDashboard()">← Back to Dashboard ME</button>
+  </div>
+
+  <!-- ===== แถวแรก 6 กราฟ ===== -->
+<div class="phase-row-top6">
+
+  <div class="group phase-top-card">
+    <h3 id="phaseCardTitle1">V</h3>
+    <div class="graph phase-top-graph">
+      <iframe id="phaseGraph1"></iframe>
+    </div>
+  </div>
+
+  <div class="group phase-top-card">
+    <h3 id="phaseCardTitle2">I</h3>
+    <div class="graph phase-top-graph">
+      <iframe id="phaseGraph2"></iframe>
+    </div>
+  </div>
+
+  <div class="group phase-top-card">
+    <h3 id="phaseCardTitle3">PF</h3>
+    <div class="graph phase-top-graph">
+      <iframe id="phaseGraph3"></iframe>
+    </div>
+  </div>
+
+  <div class="group phase-top-card">
+    <h3 id="phaseCardTitle4">S</h3>
+    <div class="graph phase-top-graph">
+      <iframe id="phaseGraph4"></iframe>
+    </div>
+  </div>
+
+  <div class="group phase-top-card">
+    <h3 id="phaseCardTitle5">P</h3>
+    <div class="graph phase-top-graph">
+      <iframe id="phaseGraph5"></iframe>
+    </div>
+  </div>
+
+  <div class="group phase-top-card">
+    <h3 id="phaseCardTitle6">Q</h3>
+    <div class="graph phase-top-graph">
+      <iframe id="phaseGraph6"></iframe>
+    </div>
+  </div>
+
+</div>
+
+  <div class="phase-row-single">
+    <div class="group phase-single-card">
+      <h3 id="phaseCardTitle7">Graph 7</h3>
+      <div class="graph phase-single-graph">
+        <iframe id="phaseGraph7"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-row-single">
+    <div class="group phase-single-card">
+      <h3 id="phaseCardTitle8">Graph 8</h3>
+      <div class="graph phase-single-graph">
+        <iframe id="phaseGraph8"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-row-single">
+    <div class="group phase-single-card">
+      <h3 id="phaseCardTitle9">Graph 9</h3>
+      <div class="graph phase-single-graph">
+        <iframe id="phaseGraph9"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-row-single">
+    <div class="group phase-single-card">
+      <h3 id="phaseCardTitle10">Graph 10</h3>
+      <div class="graph phase-single-graph">
+        <iframe id="phaseGraph10"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ต้องวางไว้ในนี้ -->
+  <div class="phase-row-single">
+    <div class="group phase-single-card">
+      <h3 id="phaseCardTitle11">Graph 11</h3>
+      <div class="graph phase-single-graph">
+        <iframe id="phaseGraph11"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-row-single">
+    <div class="group phase-single-card">
+      <h3 id="phaseCardTitle12">Graph 12</h3>
+      <div class="graph phase-single-graph">
+        <iframe id="phaseGraph12"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+<button id="scrollTopBtn" class="scroll-top-btn" onclick="scrollToTop()">
+  ⬆
+</button>
+  <script src="pageME10.js"></script>
+</body>
+</html>
