@@ -269,7 +269,7 @@ iframe{
 
 .graph-overlay.four-graphs{
   width:min(
-    1160px,
+    1100px,
     calc(100vw - var(--sidebar-w) - (var(--layout-gap) * 2) - 32px)
   );
   grid-template-columns:repeat(4, minmax(0, 1fr));
