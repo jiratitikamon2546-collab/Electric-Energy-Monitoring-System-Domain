@@ -144,7 +144,7 @@ function toggleSidebar() {
 }
 
 function goHome() {
-  window.location.href = "Homepage10.html";
+  window.location.href = "index.html";
 }
 
 function goToBuilding(fileName) {
