@@ -9,12 +9,12 @@
   --shadow:0 14px 36px rgba(122,0,25,0.12);
   --shadow-hover:0 22px 56px rgba(122,0,25,0.20);
 
-  /* เพิ่มไว้คุมระยะด้านบน */
+  /* ระยะด้านบน */
   --topbar-offset-desktop: 120px;
   --topbar-offset-tablet: 180px;
   --topbar-offset-mobile: 250px;
 
-  /* เพิ่มไว้คุม sidebar / layout */
+  /* คุม sidebar และช่องว่าง layout */
   --sidebar-w: 220px;
   --layout-gap: 20px;
 }
@@ -37,6 +37,12 @@ body{
   color:var(--text);
   margin:0;
   padding-top:var(--topbar-offset-desktop);
+}
+
+img,
+iframe{
+  max-width:100%;
+  display:block;
 }
 
 /* ===== TOPBAR ===== */
@@ -79,6 +85,7 @@ body{
   padding:8px 12px;
   border-radius:8px;
   border:none;
+  min-height:44px;
 }
 
 .project-logo{
@@ -238,6 +245,7 @@ body{
   justify-content:center;
   align-items:stretch;
   margin:0 auto;
+  min-width:0;
 }
 
 .graph-overlay.home-mode{
@@ -245,7 +253,7 @@ body{
   transform:translate(-50%, 50%);
 }
 
-/* แก้เฉพาะจุดนี้: จัดให้อยู่กลางพื้นที่ฝั่ง content จริง */
+/* จัดกึ่งกลางตามพื้นที่ฝั่ง content จริง */
 .graph-overlay.building-mode{
   left:calc(50% + ((var(--sidebar-w) + var(--layout-gap)) / 2));
   transform:translate(-50%, 50%);
@@ -291,7 +299,6 @@ body{
   min-height:0;
   border:none;
   border-radius:12px;
-  display:block;
   pointer-events:auto;
   position:relative;
   z-index:2;
@@ -320,6 +327,7 @@ body{
   margin-top:180px;
   position:relative;
   z-index:2;
+  min-width:0;
 }
 
 .container.full{
@@ -336,6 +344,7 @@ body{
   display:grid;
   gap:20px;
   width:100%;
+  min-width:0;
 }
 
 .grid.full{
@@ -419,6 +428,7 @@ body{
   flex-direction:column;
   gap:8px;
   align-items:center;
+  min-width:0;
 }
 
 .sidebar li{
@@ -502,7 +512,6 @@ body{
   width:100%;
   height:110px;
   object-fit:cover;
-  display:block;
 }
 
 .building-image-btn span{
@@ -569,6 +578,70 @@ body{
   margin-bottom:14px;
 }
 
+/* ===== จอใหญ่พิเศษ ===== */
+@media (min-width:1441px){
+  .graph-overlay.four-graphs{
+    width:min(
+      1240px,
+      calc(100vw - var(--sidebar-w) - (var(--layout-gap) * 2) - 40px)
+    );
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+  }
+
+  .graph-overlay.two-graphs{
+    width:min(
+      1240px,
+      calc(100vw - var(--sidebar-w) - (var(--layout-gap) * 2) - 40px)
+    );
+  }
+
+  #allGraphs.home-layout{
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+  }
+
+  #allGraphs.building-layout{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+
+  .big-card iframe{
+    height:300px;
+  }
+}
+
+/* ===== Laptop / Desktop กลาง ===== */
+@media (min-width:1281px) and (max-width:1440px){
+  .graph-overlay.four-graphs{
+    width:min(
+      1100px,
+      calc(100vw - var(--sidebar-w) - (var(--layout-gap) * 2) - 32px)
+    );
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+  }
+
+  .graph-overlay.two-graphs{
+    width:min(
+      1100px,
+      calc(100vw - var(--sidebar-w) - (var(--layout-gap) * 2) - 32px)
+    );
+  }
+
+  #allGraphs.home-layout{
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+  }
+
+  #allGraphs.building-layout{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+
+  .graph-card{
+    height:190px;
+  }
+
+  .big-card iframe{
+    height:270px;
+  }
+}
+
 /* ===== LARGE LAPTOP / SMALL DESKTOP ===== */
 @media (max-width:1280px){
   body{
@@ -600,8 +673,8 @@ body{
   }
 }
 
-/* ===== TABLET LANDSCAPE ===== */
-@media (max-width:1024px){
+/* ===== iPad Pro / Tablet แนวนอน ===== */
+@media (min-width:1025px) and (max-width:1366px){
   body{
     padding-top:var(--topbar-offset-tablet);
   }
@@ -620,8 +693,119 @@ body{
   }
 
   .topbar-actions{
+    width:100%;
+    justify-content:center;
+  }
+
+  .graph-overlay.building-mode{
+    left:50%;
+    transform:translate(-50%, 50%);
+  }
+
+  .graph-overlay.four-graphs{
+    width:calc(100% - 32px);
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:16px;
+  }
+
+  .graph-overlay.two-graphs{
+    width:calc(100% - 32px);
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:16px;
+  }
+
+  .graph-card{
+    height:180px;
+  }
+
+  .container{
+    display:block;
+    margin-top:280px;
+  }
+
+  .sidebar{
+    width:100%;
+    min-width:0;
+    min-height:auto;
+    margin-top:0;
+    border-radius:0 0 20px 20px;
+  }
+
+  .sidebar ul{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:10px;
+    width:100%;
+  }
+
+  #allGraphs.home-layout,
+  #allGraphs.building-layout{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+
+  #allGraphs.home-layout #card-b1,
+  #allGraphs.home-layout #card-b2,
+  #allGraphs.home-layout #card-b3,
+  #allGraphs.home-layout #card-b4,
+  #allGraphs.home-layout #card-b5,
+  #allGraphs.home-layout #card-b6,
+  #allGraphs.home-layout #card-b7,
+  #allGraphs.home-layout #card-b8,
+  #allGraphs.building-layout #card-b1,
+  #allGraphs.building-layout #card-b2,
+  #allGraphs.building-layout #card-b3,
+  #allGraphs.building-layout #card-b4{
+    grid-column:span 1;
+  }
+
+  .content{
+    padding:18px;
+  }
+
+  .big-card iframe{
+    height:240px;
+  }
+
+  .single-card iframe{
+    height:68vh;
+    min-height:420px;
+  }
+}
+
+/* ===== TABLET LANDSCAPE / iPad แนวตั้ง ===== */
+@media (min-width:769px) and (max-width:1024px){
+  body{
+    padding-top:var(--topbar-offset-tablet);
+  }
+
+  .topbar{
+    justify-content:center;
+    padding:12px 14px;
+  }
+
+  .topbar-brand{
+    width:100%;
+    min-width:0;
+    justify-content:center;
+  }
+
+  .project-title{
+    text-align:center;
+  }
+
+  .topbar-actions{
     justify-content:center;
     width:100%;
+  }
+
+  .graph-overlay{
+    width:calc(100% - 24px);
+  }
+
+  .graph-overlay.home-mode,
+  .graph-overlay.building-mode{
+    left:50%;
+    transform:translate(-50%, 50%);
   }
 
   .graph-overlay.two-graphs{
@@ -630,13 +814,14 @@ body{
   }
 
   .graph-overlay.four-graphs{
-    grid-template-columns:repeat(2, minmax(220px, 1fr));
+    grid-template-columns:repeat(2, minmax(0, 1fr));
     width:calc(100% - 24px);
+    gap:14px;
   }
 
   .container{
     display:block;
-    margin-top:280px;
+    margin-top:270px;
   }
 
   .sidebar{
@@ -663,6 +848,7 @@ body{
   #allGraphs.home-layout,
   #allGraphs.building-layout{
     grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:16px;
   }
 
   #allGraphs.home-layout #card-b1,
@@ -681,17 +867,17 @@ body{
   }
 
   .big-card iframe{
-    height:240px;
+    height:230px;
   }
 
   .single-card iframe{
-    height:65vh;
-    min-height:420px;
+    height:64vh;
+    min-height:400px;
   }
 }
 
-/* ===== MOBILE / TABLET PORTRAIT ===== */
-@media (max-width:768px){
+/* ===== มือถือแนวนอน / Tablet เล็ก ===== */
+@media (min-width:641px) and (max-width:768px){
   body{
     padding-top:var(--topbar-offset-mobile);
   }
@@ -710,7 +896,7 @@ body{
 
   .project-title{
     font-size:14px;
-    text-align:left;
+    text-align:center;
   }
 
   .project-title span{
@@ -775,13 +961,13 @@ body{
 
   .graph-overlay.two-graphs,
   .graph-overlay.four-graphs{
-    grid-template-columns:1fr;
-    gap:12px;
     width:calc(100% - 24px);
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:12px;
   }
 
   .graph-card{
-    height:180px;
+    height:170px;
   }
 
   .container{
@@ -821,22 +1007,8 @@ body{
 
   #allGraphs.home-layout,
   #allGraphs.building-layout{
-    grid-template-columns:1fr;
-  }
-
-  #allGraphs.home-layout #card-b1,
-  #allGraphs.home-layout #card-b2,
-  #allGraphs.home-layout #card-b3,
-  #allGraphs.home-layout #card-b4,
-  #allGraphs.home-layout #card-b5,
-  #allGraphs.home-layout #card-b6,
-  #allGraphs.home-layout #card-b7,
-  #allGraphs.home-layout #card-b8,
-  #allGraphs.building-layout #card-b1,
-  #allGraphs.building-layout #card-b2,
-  #allGraphs.building-layout #card-b3,
-  #allGraphs.building-layout #card-b4{
-    grid-column:span 1;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:14px;
   }
 
   .big-card iframe{
@@ -845,14 +1017,26 @@ body{
 
   .single-card iframe{
     height:58vh;
-    min-height:360px;
+    min-height:340px;
   }
 }
 
-/* ===== SMALL MOBILE ===== */
-@media (max-width:480px){
+/* ===== มือถือทุกค่าย ===== */
+@media (max-width:640px){
   body{
     padding-top:300px;
+  }
+
+  .topbar{
+    justify-content:center;
+    padding:10px 12px 14px;
+  }
+
+  .topbar-brand{
+    width:100%;
+    min-width:0;
+    justify-content:center;
+    align-items:center;
   }
 
   .project-logo{
@@ -863,10 +1047,17 @@ body{
   .project-title{
     font-size:13px;
     line-height:1.25;
+    text-align:left;
   }
 
   .project-title span{
     font-size:13px;
+  }
+
+  .topbar-actions{
+    justify-content:center;
+    width:100%;
+    gap:10px;
   }
 
   .topbar-actions > *{
@@ -874,17 +1065,110 @@ body{
     min-width:100%;
   }
 
-  .graph-title{
-    font-size:16px;
+  .topbar button,
+  .topbar input,
+  .topbar select{
+    width:100%;
+    min-height:44px;
+    font-size:13px;
+  }
+
+  .hero{
+    min-height:280px;
+    padding-top:24px;
+    padding-bottom:24px;
+  }
+
+  .hero-arrow{
+    width:42px;
+    height:42px;
+    font-size:22px;
+  }
+
+  .hero-arrow-left{
+    left:10px;
+  }
+
+  .hero-arrow-right{
+    right:10px;
+  }
+
+  .graph-overlay{
+    position:relative;
+    left:auto;
+    bottom:auto;
+    transform:none;
+    width:calc(100% - 20px);
+    margin:18px auto 0;
+  }
+
+  .graph-overlay.home-mode,
+  .graph-overlay.building-mode{
+    left:auto;
+    transform:none;
+  }
+
+  .graph-overlay.four-graphs,
+  .graph-overlay.two-graphs{
+    width:calc(100% - 20px);
+    grid-template-columns:1fr;
+    gap:12px;
   }
 
   .graph-card{
     height:165px;
     padding:10px;
+    border-radius:16px;
+  }
+
+  .graph-title{
+    font-size:14px;
+    margin-bottom:8px;
+  }
+
+  .container{
+    margin-top:18px;
+    display:block;
+  }
+
+  .sidebar{
+    width:100%;
+    min-width:0;
+    min-height:auto;
+    margin-top:0;
+    padding:14px 12px 16px;
+    border-radius:16px;
+  }
+
+  .sidebar h3{
+    font-size:19px;
+  }
+
+  .sidebar ul{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+    width:100%;
+  }
+
+  .sidebar li{
+    font-size:14px;
+    padding:10px 8px;
+  }
+
+  .content{
+    padding:12px;
+  }
+
+  #allGraphs.home-layout,
+  #allGraphs.building-layout{
+    grid-template-columns:1fr;
+    gap:14px;
   }
 
   .big-card{
     padding:12px;
+    border-radius:16px;
   }
 
   .big-card iframe{
@@ -894,9 +1178,5 @@ body{
   .single-card iframe{
     height:52vh;
     min-height:300px;
-  }
-
-  .sidebar ul{
-    grid-template-columns:1fr;
   }
 }
