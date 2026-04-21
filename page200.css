@@ -1174,9 +1174,134 @@ iframe{
   .big-card iframe{
     height:200px;
   }
-
   .single-card iframe{
     height:52vh;
     min-height:300px;
+  }
+}
+
+
+
+/* =========================
+   🔥 FIX ไม่ให้ล้นจอทุกอุปกรณ์
+========================= */
+
+/* กัน overflow ทั้งระบบ */
+*,
+*::before,
+*::after{
+  max-width:100%;
+}
+
+html, body{
+  overflow-x:hidden;
+}
+
+/* ทุก container ห้ามเกินจอ */
+.container,
+.content,
+.grid,
+.graph-overlay,
+.graph-card,
+.big-card,
+.sidebar{
+  max-width:100%;
+  min-width:0;
+}
+
+/* iframe ห้ามล้นเด็ดขาด */
+iframe{
+  width:100% !important;
+  max-width:100% !important;
+}
+
+/* แก้ graph overlay ไม่ให้เกินจอ */
+.graph-overlay{
+  max-width:100vw;
+  overflow:hidden;
+}
+
+/* 🔥 ตัวสำคัญ: จำกัดกราฟบน */
+.graph-overlay.four-graphs{
+  width:100% !important;
+  max-width:100%;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+}
+
+.graph-overlay.two-graphs{
+  width:100% !important;
+  max-width:100%;
+}
+
+/* =========================
+   📱 Tablet / iPad
+========================= */
+@media (max-width:1024px){
+
+  .graph-overlay.four-graphs{
+    grid-template-columns:repeat(2, minmax(0,1fr));
+  }
+
+  .graph-overlay.two-graphs{
+    grid-template-columns:repeat(2, minmax(0,1fr));
+  }
+
+  /* sidebar ลงด้านบน */
+  .container{
+    display:block;
+  }
+
+  .sidebar{
+    width:100%;
+    min-width:0;
+  }
+}
+
+/* =========================
+   📱 Mobile ทุกเครื่อง
+========================= */
+@media (max-width:640px){
+
+  .graph-overlay{
+    position:relative;
+    left:auto !important;
+    transform:none !important;
+    width:100% !important;
+    margin:10px auto;
+  }
+
+  .graph-overlay.four-graphs,
+  .graph-overlay.two-graphs{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+
+  .graph-card{
+    height:160px;
+  }
+
+  /* layout หลัก */
+  #allGraphs.home-layout,
+  #allGraphs.building-layout{
+    grid-template-columns:1fr !important;
+  }
+}
+
+/* =========================
+   🔥 FIX Sidebar + Overlay ชนกัน
+========================= */
+
+/* จอใหญ่ */
+@media (min-width:1025px){
+  .graph-overlay.building-mode{
+    left:calc(50% + (var(--sidebar-w) / 2));
+  }
+}
+
+/* iPad / Mobile → reset */
+@media (max-width:1024px){
+  .graph-overlay.building-mode{
+    left:50%;
+    transform:translate(-50%,50%);
   }
 }
