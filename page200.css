@@ -260,7 +260,7 @@ iframe{
 }
 
 .graph-overlay.home-mode{
-  left:58%;
+  left:50%;
   transform:translate(-50%, 50%);
 }
 
@@ -708,10 +708,10 @@ iframe{
   }
 
   .graph-overlay.home-mode,
-  .graph-overlay.building-mode{
-    left:50% !important;
-    transform:translate(-50%, 50%) !important;
-  }
+ .graph-overlay.building-mode{
+  left:calc(50% + ((var(--sidebar-w) + var(--layout-gap)) / 2));
+  transform:translate(-50%, 50%);
+}
 
   .graph-overlay.two-graphs,
   .graph-overlay.four-graphs{
