@@ -9,14 +9,12 @@
   --shadow:0 14px 36px rgba(122,0,25,0.12);
   --shadow-hover:0 22px 56px rgba(122,0,25,0.20);
 
-  /* ระยะด้านบน */
-  --topbar-offset-desktop: 120px;
-  --topbar-offset-tablet: 180px;
-  --topbar-offset-mobile: 250px;
+  --topbar-offset-desktop:120px;
+  --topbar-offset-tablet:180px;
+  --topbar-offset-mobile:250px;
 
-  /* คุม sidebar และช่องว่าง layout */
-  --sidebar-w: 220px;
-  --layout-gap: 20px;
+  --sidebar-w:220px;
+  --layout-gap:20px;
 }
 
 *{
@@ -24,6 +22,12 @@
   padding:0;
   box-sizing:border-box;
   font-family:"Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after{
+  max-width:100%;
 }
 
 html, body{
@@ -41,8 +45,13 @@ body{
 
 img,
 iframe{
-  max-width:100%;
   display:block;
+  max-width:100%;
+}
+
+iframe{
+  width:100%;
+  border:none;
 }
 
 /* ===== TOPBAR ===== */
@@ -246,6 +255,8 @@ iframe{
   align-items:stretch;
   margin:0 auto;
   min-width:0;
+  max-width:100%;
+  overflow:hidden;
 }
 
 .graph-overlay.home-mode{
@@ -253,7 +264,6 @@ iframe{
   transform:translate(-50%, 50%);
 }
 
-/* จัดกึ่งกลางตามพื้นที่ฝั่ง content จริง */
 .graph-overlay.building-mode{
   left:calc(50% + ((var(--sidebar-w) + var(--layout-gap)) / 2));
   transform:translate(-50%, 50%);
@@ -261,7 +271,7 @@ iframe{
 
 .graph-overlay.two-graphs{
   width:min(
-    1160px,
+    1100px,
     calc(100vw - var(--sidebar-w) - (var(--layout-gap) * 2) - 32px)
   );
   grid-template-columns:repeat(2, minmax(0, 1fr));
@@ -328,6 +338,7 @@ iframe{
   position:relative;
   z-index:2;
   min-width:0;
+  max-width:100%;
 }
 
 .container.full{
@@ -337,7 +348,9 @@ iframe{
 .content{
   flex:1;
   min-width:0;
+  max-width:100%;
   padding:20px;
+  overflow:hidden;
 }
 
 .grid{
@@ -345,6 +358,7 @@ iframe{
   gap:20px;
   width:100%;
   min-width:0;
+  max-width:100%;
 }
 
 .grid.full{
@@ -393,6 +407,7 @@ iframe{
 .sidebar{
   width:var(--sidebar-w);
   min-width:var(--sidebar-w);
+  max-width:100%;
   min-height:calc(100vh - 180px);
   background:linear-gradient(180deg,#7a0019,#3d000d);
   color:var(--white);
@@ -538,6 +553,8 @@ iframe{
   display:flex;
   flex-direction:column;
   min-width:0;
+  max-width:100%;
+  overflow:hidden;
 }
 
 .big-card:hover{
@@ -578,11 +595,11 @@ iframe{
   margin-bottom:14px;
 }
 
-/* ===== จอใหญ่พิเศษ ===== */
-@media (min-width:1441px){
+/* ===== Desktop ใหญ่ ===== */
+@media (min-width:1401px){
   .graph-overlay.four-graphs{
     width:min(
-      1240px,
+      1180px,
       calc(100vw - var(--sidebar-w) - (var(--layout-gap) * 2) - 40px)
     );
     grid-template-columns:repeat(4, minmax(0, 1fr));
@@ -590,17 +607,9 @@ iframe{
 
   .graph-overlay.two-graphs{
     width:min(
-      1240px,
+      1180px,
       calc(100vw - var(--sidebar-w) - (var(--layout-gap) * 2) - 40px)
     );
-  }
-
-  #allGraphs.home-layout{
-    grid-template-columns:repeat(4, minmax(0, 1fr));
-  }
-
-  #allGraphs.building-layout{
-    grid-template-columns:repeat(2, minmax(0, 1fr));
   }
 
   .big-card iframe{
@@ -608,21 +617,46 @@ iframe{
   }
 }
 
-/* ===== Laptop / Desktop กลาง ===== */
-@media (min-width:1281px) and (max-width:1440px){
+/* ===== Desktop / Laptop ===== */
+@media (min-width:1025px) and (max-width:1400px){
+  body{
+    padding-top:var(--topbar-offset-desktop);
+  }
+
+  .graph-overlay.building-mode{
+    left:calc(50% + ((var(--sidebar-w) + var(--layout-gap)) / 2));
+    transform:translate(-50%, 50%);
+  }
+
   .graph-overlay.four-graphs{
     width:min(
-      1100px,
-      calc(100vw - var(--sidebar-w) - (var(--layout-gap) * 2) - 32px)
+      1040px,
+      calc(100vw - var(--sidebar-w) - (var(--layout-gap) * 2) - 24px)
     );
     grid-template-columns:repeat(4, minmax(0, 1fr));
+    gap:16px;
   }
 
   .graph-overlay.two-graphs{
     width:min(
-      1100px,
-      calc(100vw - var(--sidebar-w) - (var(--layout-gap) * 2) - 32px)
+      1040px,
+      calc(100vw - var(--sidebar-w) - (var(--layout-gap) * 2) - 24px)
     );
+  }
+
+  .graph-card{
+    height:180px;
+  }
+
+  .container{
+    display:flex;
+    margin-top:170px;
+  }
+
+  .sidebar{
+    width:var(--sidebar-w);
+    min-width:var(--sidebar-w);
+    margin-top:-170px;
   }
 
   #allGraphs.home-layout{
@@ -633,147 +667,13 @@ iframe{
     grid-template-columns:repeat(2, minmax(0, 1fr));
   }
 
-  .graph-card{
-    height:190px;
-  }
-
-  .big-card iframe{
-    height:270px;
-  }
-}
-
-/* ===== LARGE LAPTOP / SMALL DESKTOP ===== */
-@media (max-width:1280px){
-  body{
-    padding-top:var(--topbar-offset-desktop);
-  }
-
-  .graph-overlay{
-    width:auto;
-  }
-
-  .graph-overlay.two-graphs,
-  .graph-overlay.four-graphs{
-    width:min(
-      1000px,
-      calc(100vw - var(--sidebar-w) - (var(--layout-gap) * 2) - 24px)
-    );
-  }
-
-  .graph-overlay.four-graphs{
-    grid-template-columns:repeat(4, minmax(160px, 1fr));
-  }
-
-  .container{
-    margin-top:170px;
-  }
-
   .big-card iframe{
     height:250px;
   }
 }
 
-/* ===== iPad Pro / Tablet แนวนอน ===== */
-@media (min-width:1025px) and (max-width:1366px){
-  body{
-    padding-top:var(--topbar-offset-tablet);
-  }
-
-  .topbar{
-    justify-content:center;
-  }
-
-  .topbar-brand{
-    width:100%;
-    justify-content:center;
-  }
-
-  .project-title{
-    text-align:center;
-  }
-
-  .topbar-actions{
-    width:100%;
-    justify-content:center;
-  }
-
-  .graph-overlay.building-mode{
-    left:50%;
-    transform:translate(-50%, 50%);
-  }
-
-  .graph-overlay.four-graphs{
-    width:calc(100% - 32px);
-    grid-template-columns:repeat(2, minmax(0, 1fr));
-    gap:16px;
-  }
-
-  .graph-overlay.two-graphs{
-    width:calc(100% - 32px);
-    grid-template-columns:repeat(2, minmax(0, 1fr));
-    gap:16px;
-  }
-
-  .graph-card{
-    height:180px;
-  }
-
-  .container{
-    display:block;
-    margin-top:280px;
-  }
-
-  .sidebar{
-    width:100%;
-    min-width:0;
-    min-height:auto;
-    margin-top:0;
-    border-radius:0 0 20px 20px;
-  }
-
-  .sidebar ul{
-    display:grid;
-    grid-template-columns:repeat(3, minmax(0, 1fr));
-    gap:10px;
-    width:100%;
-  }
-
-  #allGraphs.home-layout,
-  #allGraphs.building-layout{
-    grid-template-columns:repeat(2, minmax(0, 1fr));
-  }
-
-  #allGraphs.home-layout #card-b1,
-  #allGraphs.home-layout #card-b2,
-  #allGraphs.home-layout #card-b3,
-  #allGraphs.home-layout #card-b4,
-  #allGraphs.home-layout #card-b5,
-  #allGraphs.home-layout #card-b6,
-  #allGraphs.home-layout #card-b7,
-  #allGraphs.home-layout #card-b8,
-  #allGraphs.building-layout #card-b1,
-  #allGraphs.building-layout #card-b2,
-  #allGraphs.building-layout #card-b3,
-  #allGraphs.building-layout #card-b4{
-    grid-column:span 1;
-  }
-
-  .content{
-    padding:18px;
-  }
-
-  .big-card iframe{
-    height:240px;
-  }
-
-  .single-card iframe{
-    height:68vh;
-    min-height:420px;
-  }
-}
-
-/* ===== TABLET LANDSCAPE / iPad แนวตั้ง ===== */
-@media (min-width:769px) and (max-width:1024px){
+/* ===== iPad / Tablet ทั้งแนวนอนและแนวตั้ง ===== */
+@media (max-width:1024px){
   body{
     padding-top:var(--topbar-offset-tablet);
   }
@@ -798,25 +698,31 @@ iframe{
     width:100%;
   }
 
+  .topbar-actions > *{
+    min-width:140px;
+  }
+
   .graph-overlay{
-    width:calc(100% - 24px);
+    width:calc(100% - 24px) !important;
+    max-width:calc(100% - 24px);
   }
 
   .graph-overlay.home-mode,
   .graph-overlay.building-mode{
-    left:50%;
-    transform:translate(-50%, 50%);
+    left:50% !important;
+    transform:translate(-50%, 50%) !important;
   }
 
-  .graph-overlay.two-graphs{
-    grid-template-columns:repeat(2, minmax(220px, 1fr));
-    width:calc(100% - 24px);
-  }
-
+  .graph-overlay.two-graphs,
   .graph-overlay.four-graphs{
+    width:calc(100% - 24px) !important;
+    max-width:calc(100% - 24px);
     grid-template-columns:repeat(2, minmax(0, 1fr));
-    width:calc(100% - 24px);
     gap:14px;
+  }
+
+  .graph-card{
+    height:175px;
   }
 
   .container{
@@ -830,8 +736,8 @@ iframe{
     min-height:auto;
     margin-top:0;
     padding:18px 16px 20px;
-    box-shadow:0 8px 24px rgba(61,0,13,0.18);
     border-radius:0 0 20px 20px;
+    box-shadow:0 8px 24px rgba(61,0,13,0.18);
   }
 
   .sidebar ul{
@@ -843,6 +749,10 @@ iframe{
 
   .sidebar li{
     margin-bottom:0;
+  }
+
+  .content{
+    padding:16px;
   }
 
   #allGraphs.home-layout,
@@ -883,30 +793,7 @@ iframe{
   }
 
   .topbar{
-    justify-content:center;
     padding:10px 12px 14px;
-  }
-
-  .topbar-brand{
-    width:100%;
-    min-width:0;
-    justify-content:center;
-    align-items:center;
-  }
-
-  .project-title{
-    font-size:14px;
-    text-align:center;
-  }
-
-  .project-title span{
-    font-size:14px;
-  }
-
-  .topbar-actions{
-    justify-content:center;
-    width:100%;
-    gap:10px;
   }
 
   .topbar-actions > *{
@@ -914,54 +801,27 @@ iframe{
     min-width:140px;
   }
 
-  .topbar button,
-  .topbar input,
-  .topbar select{
-    font-size:12px;
-    width:100%;
-    min-height:42px;
-  }
-
-  .hero{
-    height:auto;
-    min-height:320px;
-    padding-top:28px;
-    padding-bottom:28px;
-  }
-
-  .hero-arrow{
-    width:46px;
-    height:46px;
-    font-size:24px;
-  }
-
-  .hero-arrow-left{
-    left:12px;
-  }
-
-  .hero-arrow-right{
-    right:12px;
-  }
-
   .graph-overlay{
     position:relative;
-    left:auto;
+    left:auto !important;
     bottom:auto;
-    transform:none;
-    width:calc(100% - 24px);
+    transform:none !important;
+    width:calc(100% - 24px) !important;
+    max-width:calc(100% - 24px);
     margin:20px auto 0;
     z-index:2;
   }
 
   .graph-overlay.home-mode,
   .graph-overlay.building-mode{
-    left:auto;
-    transform:none;
+    left:auto !important;
+    transform:none !important;
   }
 
   .graph-overlay.two-graphs,
   .graph-overlay.four-graphs{
-    width:calc(100% - 24px);
+    width:calc(100% - 24px) !important;
+    max-width:calc(100% - 24px);
     grid-template-columns:repeat(2, minmax(0, 1fr));
     gap:12px;
   }
@@ -971,8 +831,8 @@ iframe{
   }
 
   .container{
-    margin-top:20px;
     display:block;
+    margin-top:20px;
   }
 
   .sidebar{
@@ -982,11 +842,6 @@ iframe{
     margin-top:0;
     padding:16px 12px 18px;
     border-radius:16px;
-    box-shadow:0 8px 24px rgba(61,0,13,0.18);
-  }
-
-  .sidebar h3{
-    font-size:20px;
   }
 
   .sidebar ul{
@@ -994,11 +849,6 @@ iframe{
     grid-template-columns:repeat(2, minmax(0, 1fr));
     gap:10px;
     width:100%;
-  }
-
-  .sidebar li{
-    font-size:14px;
-    padding:10px 8px;
   }
 
   .content{
@@ -1095,22 +945,24 @@ iframe{
 
   .graph-overlay{
     position:relative;
-    left:auto;
+    left:auto !important;
     bottom:auto;
-    transform:none;
-    width:calc(100% - 20px);
+    transform:none !important;
+    width:calc(100% - 20px) !important;
+    max-width:calc(100% - 20px);
     margin:18px auto 0;
   }
 
   .graph-overlay.home-mode,
   .graph-overlay.building-mode{
-    left:auto;
-    transform:none;
+    left:auto !important;
+    transform:none !important;
   }
 
   .graph-overlay.four-graphs,
   .graph-overlay.two-graphs{
-    width:calc(100% - 20px);
+    width:calc(100% - 20px) !important;
+    max-width:calc(100% - 20px);
     grid-template-columns:1fr;
     gap:12px;
   }
@@ -1127,8 +979,8 @@ iframe{
   }
 
   .container{
-    margin-top:18px;
     display:block;
+    margin-top:18px;
   }
 
   .sidebar{
@@ -1174,134 +1026,9 @@ iframe{
   .big-card iframe{
     height:200px;
   }
+
   .single-card iframe{
     height:52vh;
     min-height:300px;
-  }
-}
-
-
-
-/* =========================
-   🔥 FIX ไม่ให้ล้นจอทุกอุปกรณ์
-========================= */
-
-/* กัน overflow ทั้งระบบ */
-*,
-*::before,
-*::after{
-  max-width:100%;
-}
-
-html, body{
-  overflow-x:hidden;
-}
-
-/* ทุก container ห้ามเกินจอ */
-.container,
-.content,
-.grid,
-.graph-overlay,
-.graph-card,
-.big-card,
-.sidebar{
-  max-width:100%;
-  min-width:0;
-}
-
-/* iframe ห้ามล้นเด็ดขาด */
-iframe{
-  width:100% !important;
-  max-width:100% !important;
-}
-
-/* แก้ graph overlay ไม่ให้เกินจอ */
-.graph-overlay{
-  max-width:100vw;
-  overflow:hidden;
-}
-
-/* 🔥 ตัวสำคัญ: จำกัดกราฟบน */
-.graph-overlay.four-graphs{
-  width:100% !important;
-  max-width:100%;
-  grid-template-columns:repeat(4, minmax(0,1fr));
-}
-
-.graph-overlay.two-graphs{
-  width:100% !important;
-  max-width:100%;
-}
-
-/* =========================
-   📱 Tablet / iPad
-========================= */
-@media (max-width:1024px){
-
-  .graph-overlay.four-graphs{
-    grid-template-columns:repeat(2, minmax(0,1fr));
-  }
-
-  .graph-overlay.two-graphs{
-    grid-template-columns:repeat(2, minmax(0,1fr));
-  }
-
-  /* sidebar ลงด้านบน */
-  .container{
-    display:block;
-  }
-
-  .sidebar{
-    width:100%;
-    min-width:0;
-  }
-}
-
-/* =========================
-   📱 Mobile ทุกเครื่อง
-========================= */
-@media (max-width:640px){
-
-  .graph-overlay{
-    position:relative;
-    left:auto !important;
-    transform:none !important;
-    width:100% !important;
-    margin:10px auto;
-  }
-
-  .graph-overlay.four-graphs,
-  .graph-overlay.two-graphs{
-    grid-template-columns:1fr;
-    gap:10px;
-  }
-
-  .graph-card{
-    height:160px;
-  }
-
-  /* layout หลัก */
-  #allGraphs.home-layout,
-  #allGraphs.building-layout{
-    grid-template-columns:1fr !important;
-  }
-}
-
-/* =========================
-   🔥 FIX Sidebar + Overlay ชนกัน
-========================= */
-
-/* จอใหญ่ */
-@media (min-width:1025px){
-  .graph-overlay.building-mode{
-    left:calc(50% + (var(--sidebar-w) / 2));
-  }
-}
-
-/* iPad / Mobile → reset */
-@media (max-width:1024px){
-  .graph-overlay.building-mode{
-    left:50%;
-    transform:translate(-50%,50%);
   }
 }
