@@ -13,6 +13,10 @@
   --topbar-offset-desktop: 120px;
   --topbar-offset-tablet: 180px;
   --topbar-offset-mobile: 250px;
+
+  /* เพิ่มไว้คุม sidebar / layout */
+  --sidebar-w: 220px;
+  --layout-gap: 20px;
 }
 
 *{
@@ -241,18 +245,25 @@ body{
   transform:translate(-50%, 50%);
 }
 
+/* แก้เฉพาะจุดนี้: จัดให้อยู่กลางพื้นที่ฝั่ง content จริง */
 .graph-overlay.building-mode{
-  left:58%;
+  left:calc(50% + ((var(--sidebar-w) + var(--layout-gap)) / 2));
   transform:translate(-50%, 50%);
 }
 
 .graph-overlay.two-graphs{
-  width:min(1160px, calc(100% - 32px));
+  width:min(
+    1160px,
+    calc(100vw - var(--sidebar-w) - (var(--layout-gap) * 2) - 32px)
+  );
   grid-template-columns:repeat(2, minmax(0, 1fr));
 }
 
 .graph-overlay.four-graphs{
-  width:min(1160px, calc(100% - 32px));
+  width:min(
+    1160px,
+    calc(100vw - var(--sidebar-w) - (var(--layout-gap) * 2) - 32px)
+  );
   grid-template-columns:repeat(4, minmax(0, 1fr));
 }
 
@@ -304,7 +315,7 @@ body{
 /* ===== MAIN LAYOUT ===== */
 .container{
   display:flex;
-  gap:20px;
+  gap:var(--layout-gap);
   align-items:flex-start;
   margin-top:180px;
   position:relative;
@@ -371,8 +382,8 @@ body{
 
 /* ===== SIDEBAR ===== */
 .sidebar{
-  width:220px;
-  min-width:220px;
+  width:var(--sidebar-w);
+  min-width:var(--sidebar-w);
   min-height:calc(100vh - 180px);
   background:linear-gradient(180deg,#7a0019,#3d000d);
   color:var(--white);
@@ -565,11 +576,19 @@ body{
   }
 
   .graph-overlay{
-    width:calc(100% - 24px);
+    width:auto;
+  }
+
+  .graph-overlay.two-graphs,
+  .graph-overlay.four-graphs{
+    width:min(
+      1000px,
+      calc(100vw - var(--sidebar-w) - (var(--layout-gap) * 2) - 24px)
+    );
   }
 
   .graph-overlay.four-graphs{
-    grid-template-columns:repeat(4, minmax(180px, 1fr));
+    grid-template-columns:repeat(4, minmax(160px, 1fr));
   }
 
   .container{
