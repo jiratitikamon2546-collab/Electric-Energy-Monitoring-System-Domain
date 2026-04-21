@@ -697,20 +697,16 @@ iframe{
     width:100%;
   }
 
-  .topbar-actions > *{
-    min-width:140px;
-  }
-
   .graph-overlay{
     width:calc(100% - 24px) !important;
     max-width:calc(100% - 24px);
   }
 
   .graph-overlay.home-mode,
- .graph-overlay.building-mode{
-  left:calc(50% + ((var(--sidebar-w) + var(--layout-gap)) / 2));
-  transform:translate(-50%, 50%);
-}
+  .graph-overlay.building-mode{
+    left:50% !important;
+    transform:translate(-50%, 50%) !important;
+  }
 
   .graph-overlay.two-graphs,
   .graph-overlay.four-graphs{
@@ -718,10 +714,6 @@ iframe{
     max-width:calc(100% - 24px);
     grid-template-columns:repeat(2, minmax(0, 1fr));
     gap:14px;
-  }
-
-  .graph-card{
-    height:175px;
   }
 
   .container{
@@ -784,7 +776,6 @@ iframe{
     min-height:400px;
   }
 }
-
 /* ===== มือถือแนวนอน / Tablet เล็ก ===== */
 @media (min-width:641px) and (max-width:768px){
   body{
@@ -1030,4 +1021,24 @@ iframe{
     height:52vh;
     min-height:300px;
   }
+}
+
+html, body{
+  overflow-x:hidden;
+}
+
+.container,
+.content,
+.grid,
+.graph-overlay,
+.graph-card,
+.big-card,
+.sidebar{
+  min-width:0;
+  max-width:100%;
+}
+
+iframe{
+  width:100% !important;
+  max-width:100% !important;
 }
