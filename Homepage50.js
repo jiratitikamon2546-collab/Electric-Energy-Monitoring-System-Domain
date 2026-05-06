@@ -215,7 +215,7 @@ function updateGraphTitles(){
     ];
 
     const mainNames = [
-      ` Real Poaer Trend `,
+      ` Real Power Trend `,
       ` Monthly Energy Consumption `,
       ` Monthly Peak Demand (W)`,
       ` Monthly Peak Demand (var)`
