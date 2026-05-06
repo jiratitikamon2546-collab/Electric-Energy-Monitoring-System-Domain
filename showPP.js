@@ -35,7 +35,7 @@ const pageOrder = [
 const AUTO_ROTATE_MS = 60 * 1000;
 
 const DEFAULT_FROM = "now/d";
-const DEFAULT_TO = "now/d+1d";
+const DEFAULT_TO = "now";
 
 /* ถ้ามีรูปก็ใส่ชื่อไฟล์ตรงนี้ ถ้าไม่ใช้ปล่อยว่างได้ */
 const IMAGE_FILE = "1.KMITLHOME.jpg";
