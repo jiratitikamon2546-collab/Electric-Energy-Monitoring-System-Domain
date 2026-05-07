@@ -190,7 +190,7 @@ function updateGraphTitles(){
       "Today's Total Peak Real Power ",
       "Today's Hightest Real Power by Building ",
       "Total Real Power",
-      "Power Consumption",
+      "Monthly Energy Consumption",
       "Monthly Peak Demand (W)",
       "Monthly Peak Demand (var)"
     ];
