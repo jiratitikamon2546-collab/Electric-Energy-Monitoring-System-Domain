@@ -75,7 +75,16 @@ function startAutoRotate() {
 
 function buildGrafanaUrl(baseUrl, panelId) {
   const connector = baseUrl.includes("?") ? "&" : "?";
-  return `${baseUrl}${connector}orgId=1&panelId=${panelId}&from=now-24h&to=now&timezone=Asia%2FBangkok&__feature.dashboardSceneSolo=true`;
+
+  return `${baseUrl}${connector}
+orgId=1
+&panelId=${panelId}
+&from=now-30d
+&to=now
+&timezone=Asia%2FBangkok
+&__feature.dashboardSceneSolo=true
+&interval=1d
+`.replace(/\s+/g, "");
 }
 
 function loadGrafanaFrames() {
