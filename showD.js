@@ -2,10 +2,10 @@
    CONFIG
 ========================= */
 
-// ใส่หน้าหลักของคุณตรงนี้
+// ใส่หน้าหลักของคุณตรงนี้//
 const HOME_PAGE = "index.html";
 
-// Base URL ใช้แค่รอบเดียว
+// Base URL ใช้แค่รอบเดียว//
 const BASE_DASHBOARD_URL =
   "https://grafana.kmitl-pcc-energy.com/d-solo/68b58da5-942e-466f-93a3-c1712b72e6ec/pre-d?";
 
