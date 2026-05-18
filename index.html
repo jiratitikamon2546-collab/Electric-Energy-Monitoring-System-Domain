@@ -40,12 +40,16 @@
   <meta
     property="og:image"
     content="KMITLHead.png">
+  
+  <meta property="og:url"
+content="https://yourdomain.com">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="KMITLHead.png">
 
   <!-- CSS -->
   <link rel="stylesheet" href="page200.css">
+
 </head>
 <body>
   <div class="topbar">
@@ -59,14 +63,14 @@
     </div>
 
     <div class="topbar-actions">
-      <button onclick="goHome()">🏠Home</button>
-      <button onclick="goToPage()">Show</button>
+      <button type="button" onclick="goHome()">🏠Home</button>
+      <button  type="button" onclick="goToPage()">Show</button>
 
       <input type="datetime-local" id="startTime">
       <input type="datetime-local" id="endTime">
 
-      <button onclick="applyTime()">Apply</button>
-      <button onclick="resetTimeFilter()">Reset Time</button>
+      <button  type="button" onclick="applyTime()">Apply</button>
+      <button type="button" onclick="resetTimeFilter()">Reset Time</button>
 
       <select id="timeRange" onchange="applyPresetRange(this.value)">
         <option value="">Absolute time range</option>
@@ -102,7 +106,7 @@
 
   <div class="hero" id="heroSlider">
     <button class="hero-arrow hero-arrow-left" aria-label="Previous Slide" onclick="prevHeroImage()">&#10094;</button>
-    <button class="hero-arrow hero-arrow-right" aria-label="Previous Slide" onclick="nextHeroImage()">&#10095;</button>
+    <button class="hero-arrow hero-arrow-right" aria-label="Next Slide" onclick="nextHeroImage()">&#10095;</button>
 
     <div class="hero-dots" id="heroDots"></div>
 
