@@ -2,10 +2,49 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-   <title>Energy Monitoring System KMITL Chumphon | Dashboard พลังงานไฟฟ้า สจล ชุมพร</title>
-  <meta name="description" content="Electric Energy Monitoring System KMITL Chumphon ระบบแสดงผลพลังงานไฟฟ้าแบบ Dashboard">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="ubTvs1IEFF0Z3vcAa8SY1sFSM71dBmwnzP3tcTOXeJQ" />
+
+  <title>
+    Energy Monitoring System KMITL Chumphon |
+    Dashboard พลังงานไฟฟ้า สจล ชุมพร
+  </title>
+
+  <meta
+    name="description"
+    content="Energy Monitoring System KMITL Chumphon ระบบ Dashboard แสดงผลการใช้พลังงานไฟฟ้าแบบ Real-time">
+
+  <meta
+    name="keywords"
+    content="Energy Dashboard, KMITL Chumphon, Dashboard พลังงานไฟฟ้า, ระบบติดตามพลังงาน, Grafana Dashboard">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#0f172a">
+
+  <meta
+    name="google-site-verification"
+    content="ubTvs1IEFF0Z3vcAa8SY1sFSM71dBmwnzP3tcTOXeJQ">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+
+  <meta
+    property="og:title"
+    content="Energy Monitoring System KMITL Chumphon">
+
+  <meta
+    property="og:description"
+    content="ระบบแสดงผลการใช้พลังงานไฟฟ้าแบบ Real-time">
+
+  <meta
+    property="og:image"
+    content="KMITLHead.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="KMITLHead.png">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="page200.css">
 </head>
 <body>
@@ -62,25 +101,25 @@
   </div>
 
   <div class="hero" id="heroSlider">
-    <button class="hero-arrow hero-arrow-left" onclick="prevHeroImage()">&#10094;</button>
-    <button class="hero-arrow hero-arrow-right" onclick="nextHeroImage()">&#10095;</button>
+    <button class="hero-arrow hero-arrow-left" aria-label="Previous Slide" onclick="prevHeroImage()">&#10094;</button>
+    <button class="hero-arrow hero-arrow-right" aria-label="Previous Slide" onclick="nextHeroImage()">&#10095;</button>
 
     <div class="hero-dots" id="heroDots"></div>
 
     <div class="graph-overlay home-mode two-graphs" id="topGraphs">
       <div class="graph-card">
         <div class="graph-title">Total Real Power Consumption</div>
-        <iframe id="g1"></iframe>
+        <iframe id="g1" loading="lazy"></iframe>
       </div>
 
       <div class="graph-card">
         <div class="graph-title">Total Energy Consumption</div>
-        <iframe id="g2"></iframe>
+        <iframe id="g2" loading="lazy"></iframe>
       </div>
 
       <div class="graph-card extra-top-card hidden-top-graph">
         <div class="graph-title">Real Power Consumption</div>
-        <iframe id="g3"></iframe>
+        <iframe id="g3" loading="lazy"></iframe>
       </div>
 
       <div class="graph-card extra-top-card hidden-top-graph">
@@ -102,55 +141,55 @@
       <div id="allGraphs" class="grid full home-layout">
         <div class="big-card" id="card-b1">
           <div class="graph-title">Energy Consumption (Today)</div>
-          <iframe id="b1"></iframe>
+          <iframe id="b1" loading="lazy"></iframe>
         </div>
 
         <div class="big-card" id="card-b2">
           <div class="graph-title">Peak Energy Consumption (Today)</div>
-          <iframe id="b2"></iframe>
+          <iframe id="b2" loading="lazy"></iframe>
         </div>
 
         <div class="big-card" id="card-b3">
           <div class="graph-title">Peak Real Power Consumption (Today)</div>
-          <iframe id="b3"></iframe>
+          <iframe id="b3" loading="lazy"></iframe>
         </div>
 
         <div class="big-card" id="card-b4">
           <div class="graph-title">Hightest Peak Real Power : Building (Today)</div>
-          <iframe id="b4"></iframe>
+          <iframe id="b4" loading="lazy"></iframe>
         </div>
 
         <div class="big-card" id="card-b5">
           <div class="graph-title">Total Real Power </div>
-          <iframe id="b5"></iframe>
+          <iframe id="b5" loading="lazy"></iframe>
         </div>
 
         <div class="big-card" id="card-b6">
           <div class="graph-title">Monthly Energy</div>
-          <iframe id="b6"></iframe>
+          <iframe id="b6" loading="lazy"></iframe>
         </div>
 
         <div class="big-card" id="card-b7">
           <div class="graph-title">Monthly Peak Demand (kW)</div>
-          <iframe id="b7"></iframe>
+          <iframe id="b7" loading="lazy"></iframe>
         </div>
 
         <div class="big-card" id="card-b8">
           <div class="graph-title">Monthly Peak Demand (kvar)</div>
-          <iframe id="b8"></iframe>
+          <iframe id="b8" loading="lazy"></iframe>
         </div>
       </div>
 
       <div id="singleGraph" style="display:none;">
         <button class="back-btn" onclick="backToAll()">ย้อนกลับ</button>
         <div class="single-card">
-          <iframe id="single"></iframe>
+          <iframe id="single" loading="lazy"></iframe>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="Homepage50.js"></script>
+  <script src="Homepage50.js" defer></script>
   
 </body>
 </html>
